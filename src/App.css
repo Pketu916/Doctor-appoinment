@@ -40,15 +40,20 @@
 
 /* ============================================================================ */
 
+
+/* html {
+    transition: smooth;
+} */
+
 #Login {
     background-image: url(./img/wp2469685-doctor-wallpaper.jpg);
     /* background-color: black; */
     height: 100vh;
 }
 
-#Home {
+#home {
     background-image: url(./img/wp2386912-stethoscope-wallpapers.jpg);
-    height: 85vh;
+    height: 86.5vh;
     background-size: cover;
 }
 
@@ -149,7 +154,7 @@ h3 {
 
 h2:hover,
 h3:hover {
-    color: green;
+    color: red;
 }
 
 .navbar {
@@ -178,4 +183,9 @@ h3:hover {
 
 .bgfooter {
     background-color: #6488EA;
+}
+
+p {
+    font-size: 20px;
+    color: black;
 }

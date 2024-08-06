@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div
       id="home"
-      className="new d-flex flex-column align-items-center justify-content-center min-vh-100"
+      className="new d-flex flex-column align-items-center justify-content-center "
     >
       <h2> Welcome to MediManage </h2>{" "}
       <p> Manage your appointments and patient details with ease. </p>{" "}
