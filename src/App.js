@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/about" element={loggedIn ? <About /> : <Navigate to="/login" />} />
         </Routes>
         {loggedIn && <Footer />}
-      </div>
+      </div> 
     </Router>
   );
 };
