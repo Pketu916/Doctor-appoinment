@@ -53,7 +53,8 @@
 
 #home {
     background-image: url(./img/wp2386912-stethoscope-wallpapers.jpg);
-    height: 86.5vh;
+    /* height: 86.5vh; */
+    height: 88.7vh;
     background-size: cover;
 }
 
@@ -65,8 +66,13 @@
 
 #about {
     background-image: url(./img/wp2968489-medical-doctor-wallpaper-hd.jpg);
-    height: 85vh;
+    height: 88.7vh;
     background-size: cover;
+}
+
+.about {
+    margin: 0px 400px;
+    color: black;
 }
 
 #patientDetails {

@@ -3,6 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <div id="about" className="new">
+      <div className="about login-form ">
       <h2> About MediManage </h2>{" "}
       <p>
         {" "}
@@ -31,6 +32,7 @@ const About = () => {
         on administrative tasks.Join us in revolutionizing healthcare
         management.{" "}
       </p>{" "}
+    </div>
     </div>
   );
 };
