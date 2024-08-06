@@ -194,3 +194,12 @@ p {
     font-size: 20px;
     color: black;
 }
+
+.btn2 {
+    margin-left: 25px;
+}
+
+
+/* input.form-control:hover , option:hover{
+  background-color: rgba(255, 255, 255, 0.63);
+} */
