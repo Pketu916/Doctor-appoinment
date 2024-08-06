@@ -53,8 +53,7 @@
 
 #home {
     background-image: url(./img/wp2386912-stethoscope-wallpapers.jpg);
-    /* height: 86.5vh; */
-    height: 88.7vh;
+    height: 86.5vh;
     background-size: cover;
 }
 
