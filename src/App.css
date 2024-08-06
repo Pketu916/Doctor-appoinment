@@ -65,12 +65,12 @@
 
 #about {
     background-image: url(./img/wp2968489-medical-doctor-wallpaper-hd.jpg);
-    height: 88.7vh;
+    height: 86.9vh;
     background-size: cover;
 }
 
 .about {
-    margin: 0px 400px;
+    margin: 50px 400px 0px;
     color: black;
 }
 
@@ -207,3 +207,26 @@ p {
 /* input.form-control:hover , option:hover{
   background-color: rgba(255, 255, 255, 0.63);
 } */
+
+.mainlist {
+    margin: 20px auto;
+    width: 85%;
+}
+
+.list {
+    border: 2px solid black;
+    /* display: inline-block; */
+    margin: 2% 6%;
+    /* height: 226px; */
+    width: 333px;
+    display: inline-block;
+    padding: 1%;
+    justify-content: center;
+}
+
+.listtable {
+    /* width: 20%; */
+    /* height: 30%; */
+    /* display: contents; */
+    display: flex;
+}

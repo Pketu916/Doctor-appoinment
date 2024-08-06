@@ -113,7 +113,7 @@ const PatientDetails = () => {
           </form>{" "}
         </div>{" "}
       </div>{" "}
-      <div className="mt-4">
+      <div className=" mainlist">
         <h3> Patients List </h3>{" "}
         <div className="form-group">
           <label> Sort by: </label>{" "}
@@ -126,10 +126,10 @@ const PatientDetails = () => {
             <option value="patientName"> Patient Name </option>{" "}
           </select>{" "}
         </div>{" "}
-        <ul className="list-group">
+        <ul className=" listtable">
           {" "}
           {sortedPatients.map((patient, index) => (
-            <li key={index} className="list-group-item">
+            <li key={index} className="list ">
               <div className="patient-detail">
                 {" "}
                 <strong> Case Number: </strong> {patient.caseNumber}{" "}

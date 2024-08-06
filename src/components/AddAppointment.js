@@ -101,7 +101,7 @@ const AddAppointment = () => {
         </div>
       </div>
 
-      <div className="mt-4">
+      <div className="mainlist">
         <h3>Appointments List</h3>
         <div className="form-group">
           <label>Sort by:</label>
@@ -111,9 +111,9 @@ const AddAppointment = () => {
             <option value="patientName">Patient Name</option>
           </select>
         </div>
-        <ul className="list-group">
+        <ul className="listtable">
           {sortedAppointments.map((appointment, index) => (
-            <li key={index} className="list-group-item">
+            <li key={index} className="list">
               <div className="appointment-detail"><strong>Appointment Number:</strong> {appointment.appointmentNumber}</div>
               <div className="appointment-detail"><strong>Patient Name:</strong> {appointment.patientName}</div>
               <div className="appointment-detail"><strong>Doctor:</strong> {appointment.doctor}</div>
