@@ -115,7 +115,7 @@ const PatientDetails = () => {
       </div>{" "}
       <div className=" mainlist">
         <h3> Patients List </h3>{" "}
-        <div className="form-group">
+        <div className="form-group-sort form-group">
           <label> Sort by: </label>{" "}
           <select
             className="form-control"

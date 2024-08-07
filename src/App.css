@@ -224,9 +224,19 @@ p {
     justify-content: center;
 }
 
-.listtable {
-    /* width: 20%; */
-    /* height: 30%; */
-    /* display: contents; */
-    display: flex;
+
+/* .listtable {
+    width: 20%;
+    height: 30%;
+    display: contents;
+    display: inline-block;
+} */
+
+.form-group-sort {
+    width: 25%;
+    margin: 0px auto;
+}
+
+.patient-details {
+    display: inline;
 }

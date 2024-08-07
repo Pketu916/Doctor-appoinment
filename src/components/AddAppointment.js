@@ -103,7 +103,7 @@ const AddAppointment = () => {
 
       <div className="mainlist">
         <h3>Appointments List</h3>
-        <div className="form-group">
+        <div className="form-group-sort form-group">
           <label>Sort by:</label>
           <select className="form-control" value={sortBy} onChange={handleSortChange}>
             <option value="date">Date</option>
