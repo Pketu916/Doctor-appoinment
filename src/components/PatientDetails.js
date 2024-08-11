@@ -155,13 +155,18 @@ const PatientDetails = () => {
       return newSections;
     });
   };
+  
 
   return (
     <div>
+      <div id="patientDetails" className ="text-center">
+        <button type="button" id="homeButton" className="btn btn-primary mx-2">Home</button>
+        <button type="button" id="addAppointmentButton"className="btn btn-secondary mx-2">Add Appointment</button>
+      </div>
       <div className="new d-flex align-items-center justify-content-center">
         <div className="login-form p-4">
           <h2>{isEditing ? "Edit Patient Details" : "Add Patient Details"}</h2>
-          <form onSubmit={handleSubmit}>
+          <form id="form" onSubmit={handleSubmit}>
             {/* Personal Details Section */}
             <Collapse in={openSections[0]}>
               <div>
@@ -298,9 +303,9 @@ const PatientDetails = () => {
                 <button type="button" className="btn btn-secondary" onClick={() => goToPreviousSection(5)}>Previous</button>
               </div>
             </Collapse>
-                <button type="submit" className="btn btn-primary mt-3">
-                  {isEditing ? "Update Patient Details" : "Add Patient Details"}
-                </button>
+            <button type="submit" className="btn btn-primary mt-3">
+              {isEditing ? "Update Patient Details" : "Add Patient Details"}
+            </button>
           </form>
         </div>
       </div>
