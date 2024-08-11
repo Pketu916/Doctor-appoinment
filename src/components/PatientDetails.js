@@ -27,6 +27,7 @@ const PatientDetails = () => {
   });
   const [patients, setPatients] = useState([]);
   const [sortBy, setSortBy] = useState("caseNumber");
+  const [sortOrder, setSortOrder] = useState("ascending");
   const [openSections, setOpenSections] = useState([true, false, false, false, false, false]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
@@ -117,11 +118,20 @@ const PatientDetails = () => {
     setSortBy(e.target.value);
   };
 
+  const handleOrderChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+
   const sortedPatients = [...patients].sort((a, b) => {
+    let comparison = 0;
+
     if (sortBy === "caseNumber") {
-      return a.caseNumber.localeCompare(b.caseNumber);
+      comparison = a.caseNumber.localeCompare(b.caseNumber);
+    } else if (sortBy === "name") {
+      comparison = a.name.localeCompare(b.name);
     }
-    return a.name.localeCompare(b.name);
+
+    return sortOrder === "ascending" ? comparison : -comparison;
   });
 
   const handleEditPatient = (index) => {
@@ -314,11 +324,21 @@ const PatientDetails = () => {
       <div className="mainlist">
         <h3>Patients List</h3>
         <div className="form-group-sort form-group">
-          <label>Sort by:</label>
-          <select className="form-control" value={sortBy} onChange={handleSortChange}>
-            <option value="caseNumber">Case Number</option>
-            <option value="name">Patient Name</option>
-          </select>
+        <div>
+      <label>Sort by:</label>
+      <select className="form-control" value={sortBy} onChange={handleSortChange}>
+        <option value="caseNumber">Case Number</option>
+        <option value="name">Patient Name</option>
+      </select>
+
+      <label>Order:</label>
+      <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
+        <option value="ascending">Ascending</option>
+        <option value="descending">Descending</option>
+      </select>
+
+      {/* Render sorted patients here */}
+    </div>
         </div>
         <ul className="listtable">
           {sortedPatients.map((patient, index) => (
