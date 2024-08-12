@@ -165,13 +165,13 @@ const PatientDetails = () => {
       return newSections;
     });
   };
-  
+
 
   return (
     <div>
-      <div id="patientDetails" className ="text-center">
+      <div id="patientDetails" className="text-center">
         <button type="button" id="homeButton" className="btn btn-primary mx-2">Home</button>
-        <button type="button" id="addAppointmentButton"className="btn btn-secondary mx-2">Add Appointment</button>
+        <button type="button" id="addAppointmentButton" className="btn btn-secondary mx-2">Add Patient Details</button>
       </div>
       <div className="new d-flex align-items-center justify-content-center">
         <div className="login-form p-4">
@@ -324,97 +324,87 @@ const PatientDetails = () => {
       <div className="mainlist">
         <h3>Patients List</h3>
         <div className="form-group-sort form-group">
-        <div>
-      <label>Sort by:</label>
-      <select className="form-control" value={sortBy} onChange={handleSortChange}>
-        <option value="caseNumber">Case Number</option>
-        <option value="name">Patient Name</option>
-      </select>
+          <div>
+            <label>Sort by:</label>
+            <select className="form-control" value={sortBy} onChange={handleSortChange}>
+              <option value="caseNumber">Case Number</option>
+              <option value="name">Patient Name</option>
+            </select>
 
-      <label>Order:</label>
-      <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
-        <option value="ascending">Ascending</option>
-        <option value="descending">Descending</option>
-      </select>
+            <label>Order:</label>
+            <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
+              <option value="ascending">Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
 
-      {/* Render sorted patients here */}
-    </div>
-        </div>
-        <ul className="listtable">
-          {sortedPatients.map((patient, index) => (
-            <li key={index} className="list">
-              <div className="patient-detail">
-                <strong>Case Number:</strong> {patient.caseNumber}
-              </div>
-              <div className="patient-detail">
-                <strong>Name:</strong> {patient.name}
-              </div>
-              <div className="patient-detail">
-                <strong>Age:</strong> {patient.age} years old
-              </div>
-              <div className="patient-detail">
-                <strong>Gender:</strong> {patient.gender}
-              </div>
-              <div className="patient-detail">
-                <strong>Date of Birth:</strong> {patient.dob}
-              </div>
-              <div className="patient-detail">
-                <strong>Address:</strong> {patient.address}
-              </div>
-              <div className="patient-detail">
-                <strong>Phone Number:</strong> {patient.phone}
-              </div>
-              <div className="patient-detail">
-                <strong>Email:</strong> {patient.email}
-              </div>
-              <div className="patient-detail">
-                <strong>Emergency Contact:</strong> {patient.emergencyContact}
-              </div>
-              <div className="patient-detail">
-                <strong>Past Diagnoses:</strong> {patient.pastDiagnoses}
-              </div>
-              <div className="patient-detail">
-                <strong>Surgeries:</strong> {patient.surgeries}
-              </div>
-              <div className="patient-detail">
-                <strong>Allergies:</strong> {patient.allergies}
-              </div>
-              <div className="patient-detail">
-                <strong>Current Medications:</strong> {patient.currentMedications}
-              </div>
-              <div className="patient-detail">
-                <strong>Appointment Date:</strong> {patient.appointmentDate}
-              </div>
-              <div className="patient-detail">
-                <strong>Doctor Name:</strong> {patient.doctorName}
-              </div>
-              <div className="patient-detail">
-                <strong>Insurance Provider:</strong> {patient.insuranceProvider}
-              </div>
-              <div className="patient-detail">
-                <strong>Policy Number:</strong> {patient.policyNumber}
-              </div>
-              <div className="patient-detail">
-                <strong>Coverage Details:</strong> {patient.coverageDetails}
-              </div>
-              <div className="patient-detail">
-                <strong>Doctor's Notes:</strong> {patient.doctorsNotes}
-              </div>
-              <div className="patient-detail">
-                <strong>Patient Notes:</strong> {patient.patientNotes}
-              </div>
-              <div className="patient-detail">
-                <strong>Additional Observations:</strong> {patient.additionalObservations}
-              </div>
-              <button className="btn btn-warning mt-2" onClick={() => handleEditPatient(index)}>
-                Edit
-              </button>
-            </li>
-          ))}
-        </ul>
+            {/* Render sorted patients here */}
+            </div>
+</div>
+<div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+  <table className="table table-bordered">
+    <thead>
+      <tr>
+        <th style={{ width: '80px' }}>Case Number</th>
+        <th style={{ width: '150px' }}>Name</th>
+        <th style={{ width: '50px' }}>Age</th>
+        <th style={{ width: '80px' }}>Gender</th>
+        <th style={{ width: '120px' }}>Date of Birth</th>
+        <th style={{ width: '200px' }}>Address</th>
+        <th style={{ width: '120px' }}>Phone Number</th>
+        <th style={{ width: '150px' }}>Email</th>
+        <th style={{ width: '150px' }}>Emergency Contact</th>
+        <th style={{ width: '150px' }}>Past Diagnoses</th>
+        <th style={{ width: '150px' }}>Surgeries</th>
+        <th style={{ width: '150px' }}>Allergies</th>
+        <th style={{ width: '150px' }}>Current Medications</th>
+        <th style={{ width: '120px' }}>Appointment Date</th>
+        <th style={{ width: '150px' }}>Doctor Name</th>
+        <th style={{ width: '150px' }}>Insurance Provider</th>
+        <th style={{ width: '150px' }}>Policy Number</th>
+        <th style={{ width: '150px' }}>Coverage Details</th>
+        <th style={{ width: '150px' }}>Doctor's Notes</th>
+        <th style={{ width: '150px' }}>Patient Notes</th>
+        <th style={{ width: '150px' }}>Additional Observations</th>
+        <th style={{ width: '100px' }}>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sortedPatients.map((patient, index) => (
+        <tr key={index}>
+          <td>{patient.caseNumber}</td>
+          <td>{patient.name}</td>
+          <td>{patient.age} years old</td>
+          <td>{patient.gender}</td>
+          <td>{patient.dob}</td>
+          <td>{patient.address}</td>
+          <td>{patient.phone}</td>
+          <td>{patient.email}</td>
+          <td>{patient.emergencyContact}</td>
+          <td>{patient.pastDiagnoses}</td>
+          <td>{patient.surgeries}</td>
+          <td>{patient.allergies}</td>
+          <td>{patient.currentMedications}</td>
+          <td>{patient.appointmentDate}</td>
+          <td>{patient.doctorName}</td>
+          <td>{patient.insuranceProvider}</td>
+          <td>{patient.policyNumber}</td>
+          <td>{patient.coverageDetails}</td>
+          <td>{patient.doctorsNotes}</td>
+          <td>{patient.patientNotes}</td>
+          <td>{patient.additionalObservations}</td>
+          <td>
+            <button className="btn btn-warning" onClick={() => handleEditPatient(index)}>Edit</button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+</div>
+
       </div>
-    </div>
-  );
+
+      );
 };
 
 export default PatientDetails;
