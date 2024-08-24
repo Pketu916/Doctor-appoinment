@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../img/logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
+        <img src={Logo} alt="Logo" className="navbar-logo" />
         <Link className="navbar-brand" to="/">MediManage</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -18,10 +20,13 @@ const Navbar = () => {
               <Link className="nav-link" to="/add-appointment">Appointment</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/patient-details">Patient_Details</Link>
+              <Link className="nav-link" to="/patient-details">Patient Details</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">About</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/doctor-list">Doctors</Link> {/* New link for Doctors */}
             </li>
           </ul>
         </div>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Collapse } from "react-bootstrap";
-// import Collapse from 'react-bootstrap/Collapse';
 
 const PatientDetails = () => {
   const [caseCounter, setCaseCounter] = useState(1);
@@ -33,7 +32,6 @@ const PatientDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [error, setError] = useState("");
-  const [isChecked, setIsChecked] = React.useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -168,43 +166,30 @@ const PatientDetails = () => {
     });
   };
 
-  // const handleButtonClick = () => {
-  //   // Scroll to the form with the specified ID
-  //   document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
-  // };
+    // Define the handleButtonClick function
+    const handleButtonClick = () => {
+      // Scroll to the form with the specified ID
+      document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+    };
 
-  return (
-    <div>
-      <div id="patientDetails" className="container-fluid d-flex align-items-center flex-column">
-        <div className="row">
-          <div className="homeset col-md-6 d-flex flex-column justify-content-center">
-            <h2 className="mb-4">The Most Valuable Thing is Your Health</h2>
-            <p className="pa mb-4">
-              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-            </p>
-            <button type="button" id="homeButton" className="mt-5 btn btn-primary mx-2">
-              Home
-            </button>
-            <button
-              type="button"
-              id="addAppointmentButton"
-              className="btn btn-secondary mx-2"
-              onClick={() => {
-                // handleButtonClick();
-                setIsChecked(prev => !prev); // Toggle the isChecked state
-              }}
-              aria-controls="example-collapse-text"
-              aria-expanded={isChecked} // Reflect the state in aria-expanded attribute
-            >
-              {isChecked ? "Hide Form" : "Add Patient"}
-            </button>
-          </div>
+    return (
+      <div>
+        <div id="patientDetails" className="text-center">
+          <button type="button" id="homeButton" className="btn btn-primary mx-2">
+            Home
+          </button>
+          <button
+            type="button"
+            id="addAppointmentButton"
+            className="btn btn-secondary mx-2"
+            onClick={handleButtonClick}
+          >
+            Add Patient Details
+          </button>
         </div>
-      </div>
-      <div className="new d-flex align-items-center justify-content-center">
-        <Collapse in={isChecked}>
-          <div id="example-collapse-text" className="login-form p-4 custom-collapse">
-          <h2>{isEditing ? "Edit Patient Details" : "Add Patient Details"}</h2>
+        <div className="new d-flex align-items-center justify-content-center">
+          <div className="login-form p-4">
+            <h2>{isEditing ? "Edit Patient Details" : "Add Patient Details"}</h2>
             <form id="form" onSubmit={handleSubmit}>
               {/* Personal Details Section */}
               <Collapse in={openSections[0]}>
@@ -347,94 +332,93 @@ const PatientDetails = () => {
               </button>
             </form>
           </div>
-        </Collapse>
-      </div>
+        </div>
 
-      {/* Patients List */}
-      <div className="mainlist">
-        <h3>Patients List</h3>
-        <div className="form-group-sort form-group">
-          <div>
-            <label>Sort by:</label>
-            <select className="form-control" value={sortBy} onChange={handleSortChange}>
-              <option value="caseNumber">Case Number</option>
-              <option value="name">Patient Name</option>
-            </select>
+        {/* Patients List */}
+        <div className="mainlist">
+          <h3>Patients List</h3>
+          <div className="form-group-sort form-group">
+            <div>
+              <label>Sort by:</label>
+              <select className="form-control" value={sortBy} onChange={handleSortChange}>
+                <option value="caseNumber">Case Number</option>
+                <option value="name">Patient Name</option>
+              </select>
 
-            <label>Order:</label>
-            <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
-              <option value="ascending">Ascending</option>
-              <option value="descending">Descending</option>
-            </select>
+              <label>Order:</label>
+              <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+              </select>
 
-            {/* Render sorted patients here */}
+              {/* Render sorted patients here */}
+            </div>
+          </div>
+          <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th style={{ width: '80px' }}>Case Number</th>
+                  <th style={{ width: '150px' }}>Name</th>
+                  <th style={{ width: '50px' }}>Age</th>
+                  <th style={{ width: '80px' }}>Gender</th>
+                  <th style={{ width: '120px' }}>Date of Birth</th>
+                  <th style={{ width: '200px' }}>Address</th>
+                  <th style={{ width: '120px' }}>Phone Number</th>
+                  <th style={{ width: '150px' }}>Email</th>
+                  <th style={{ width: '150px' }}>Emergency Contact</th>
+                  <th style={{ width: '150px' }}>Past Diagnoses</th>
+                  <th style={{ width: '150px' }}>Surgeries</th>
+                  <th style={{ width: '150px' }}>Allergies</th>
+                  <th style={{ width: '150px' }}>Current Medications</th>
+                  <th style={{ width: '120px' }}>Appointment Date</th>
+                  <th style={{ width: '150px' }}>Doctor Name</th>
+                  <th style={{ width: '150px' }}>Insurance Provider</th>
+                  <th style={{ width: '150px' }}>Policy Number</th>
+                  <th style={{ width: '150px' }}>Coverage Details</th>
+                  <th style={{ width: '150px' }}>Doctor's Notes</th>
+                  <th style={{ width: '150px' }}>Patient Notes</th>
+                  <th style={{ width: '150px' }}>Additional Observations</th>
+                  <th style={{ width: '100px' }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedPatients.map((patient, index) => (
+                  <tr key={index}>
+                    <td>{patient.caseNumber}</td>
+                    <td>{patient.name}</td>
+                    <td>{patient.age} years old</td>
+                    <td>{patient.gender}</td>
+                    <td>{patient.dob}</td>
+                    <td>{patient.address}</td>
+                    <td>{patient.phone}</td>
+                    <td>{patient.email}</td>
+                    <td>{patient.emergencyContact}</td>
+                    <td>{patient.pastDiagnoses}</td>
+                    <td>{patient.surgeries}</td>
+                    <td>{patient.allergies}</td>
+                    <td>{patient.currentMedications}</td>
+                    <td>{patient.appointmentDate}</td>
+                    <td>{patient.doctorName}</td>
+                    <td>{patient.insuranceProvider}</td>
+                    <td>{patient.policyNumber}</td>
+                    <td>{patient.coverageDetails}</td>
+                    <td>{patient.doctorsNotes}</td>
+                    <td>{patient.patientNotes}</td>
+                    <td>{patient.additionalObservations}</td>
+                    <td>
+                      <button className="btn btn-warning" onClick={() => handleEditPatient(index)}>Edit</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-        <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th style={{ width: '80px' }}>Case Number</th>
-                <th style={{ width: '150px' }}>Name</th>
-                <th style={{ width: '50px' }}>Age</th>
-                <th style={{ width: '80px' }}>Gender</th>
-                <th style={{ width: '120px' }}>Date of Birth</th>
-                <th style={{ width: '200px' }}>Address</th>
-                <th style={{ width: '120px' }}>Phone Number</th>
-                <th style={{ width: '150px' }}>Email</th>
-                <th style={{ width: '150px' }}>Emergency Contact</th>
-                <th style={{ width: '150px' }}>Past Diagnoses</th>
-                <th style={{ width: '150px' }}>Surgeries</th>
-                <th style={{ width: '150px' }}>Allergies</th>
-                <th style={{ width: '150px' }}>Current Medications</th>
-                <th style={{ width: '120px' }}>Appointment Date</th>
-                <th style={{ width: '150px' }}>Doctor Name</th>
-                <th style={{ width: '150px' }}>Insurance Provider</th>
-                <th style={{ width: '150px' }}>Policy Number</th>
-                <th style={{ width: '150px' }}>Coverage Details</th>
-                <th style={{ width: '150px' }}>Doctor's Notes</th>
-                <th style={{ width: '150px' }}>Patient Notes</th>
-                <th style={{ width: '150px' }}>Additional Observations</th>
-                <th style={{ width: '100px' }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedPatients.map((patient, index) => (
-                <tr key={index}>
-                  <td>{patient.caseNumber}</td>
-                  <td>{patient.name}</td>
-                  <td>{patient.age} years old</td>
-                  <td>{patient.gender}</td>
-                  <td>{patient.dob}</td>
-                  <td>{patient.address}</td>
-                  <td>{patient.phone}</td>
-                  <td>{patient.email}</td>
-                  <td>{patient.emergencyContact}</td>
-                  <td>{patient.pastDiagnoses}</td>
-                  <td>{patient.surgeries}</td>
-                  <td>{patient.allergies}</td>
-                  <td>{patient.currentMedications}</td>
-                  <td>{patient.appointmentDate}</td>
-                  <td>{patient.doctorName}</td>
-                  <td>{patient.insuranceProvider}</td>
-                  <td>{patient.policyNumber}</td>
-                  <td>{patient.coverageDetails}</td>
-                  <td>{patient.doctorsNotes}</td>
-                  <td>{patient.patientNotes}</td>
-                  <td>{patient.additionalObservations}</td>
-                  <td>
-                    <button className="btn btn-warning" onClick={() => handleEditPatient(index)}>Edit</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+
       </div>
 
-    </div >
+    );
+  };
 
-  );
-};
-
-export default PatientDetails;
+  export default PatientDetails;

@@ -32,6 +32,7 @@
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -52,7 +53,8 @@
 }
 
 #home {
-    background-image: url(./img/wp2386912-stethoscope-wallpapers.jpg);
+    /* background-image: url(./img/wp2386912-stethoscope-wallpapers.jpg); */
+    background-image: url(./img/bg_1.jpg.webp);
     height: 86.5vh;
     background-size: cover;
 }
@@ -70,22 +72,30 @@
 }
 
 .about {
-    margin: 50px 400px 0px;
+    margin: 0px 400px 0px;
     color: black;
+    border-top: 2px solid;
 }
 
 #patientDetails {
-    background-image: url(./img/wp2789220-doctors-wallpapers.jpg);
+    /* background-image: url(./img/wp2789220-doctors-wallpapers.jpg); */
+    background-image: url(./img/bg_1.jpg.webp);
     /* background-size: cover; */
-    height: 50vh;
+    height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
 }
-
+html{
+    scroll-behavior: smooth;
+}
 #homeButton,
 #addAppointmentButton {
-    margin: 0 10px; /* Adjust the spacing between the buttons */
+    margin: 0 10px;
+    /* Adjust the spacing between the buttons */
 }
 
 
@@ -106,6 +116,23 @@ h3 {
     color: green;
     font-size: 45px;
     transition: background-color 0.3s;
+}
+
+.homeset {
+    width: 40%;
+    padding-left: 100px;
+}
+
+.homesetbtn {
+    display: inline-flex;
+    justify-content: space-around;
+}
+
+.pa {
+    text-align: left;
+    padding: 0px 40px;
+    font-size: 20px;
+    color: black;
 }
 
 .appointment-detail {
@@ -139,7 +166,7 @@ h3 {
 .new {
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    padding: 20px;
+    /* margin: 20px  0px; */
     /* border-radius: 10px; */
 }
 
@@ -172,38 +199,97 @@ h3:hover {
     color: red;
 }
 
+/* src/components/Navbar.css */
 .navbar {
-    position: sticky;
-    background-color: #6488EA;
-    top: 0px;
+    background-color: #f8f9fa;
+    /* Light background color */
+    padding: 0.5rem 1rem;
+    /* Padding around the navbar */
+    border-bottom: 1px solid #dee2e6;
+    /* Border at the bottom */
+}
+
+.navbar-logo {
+    height: 100px;
+    /* Set a fixed height for the logo */
+    margin-right: 1rem;
+    /* Space between logo and other items */
+}
+
+.navbar-toggler {
+    border: none;
+    /* Remove default border from the toggle button */
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml,...');
+    /* You can use an SVG or font icon */
+}
+
+.navbar-nav {
+    margin-left: auto;
+    /* Push links to the right */
 }
 
 .nav-link {
+    color: #343a40;
+    /* Dark text color for links */
     font-size: 23px;
-    color: black;
-    margin: 0px 20px 0px 20px;
+    /* Font size for links */
+    padding: 1rem 2rem;
+    /* Padding around the link text */
+    text-decoration: none;
+    /* Remove underline */
+    border: 2px solid transparent;
+    /* Add border with transparent color for default state */
+    border-radius: 5px;
+    /* Rounded corners */
 }
 
-.navbar-brand {
+.nav-link:hover {
+    color: #007bff;
+    /* Color on hover */
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+.nav-link::after {
+    background: red;
+}
+
+.navbar-collapse {
+    display: flex;
+    /* Flexbox for alignment */
+}
+
+.container {
+    display: flex;
+    /* Flexbox to center content */
+    align-items: center;
+    /* Align items vertically */
+}
+
+
+.navbar {
+    position: sticky;
+    top: 0px;
+}
+
+
+
+/* .navbar-brand {
     left: 50px;
     color: green;
     font-weight: bold;
     position: absolute;
     font-size: 23px;
-}
-
-.nav-link:hover {
-    color: green;
-}
+} */
 
 .bgfooter {
     background-color: #6488EA;
 }
 
-p {
-    font-size: 20px;
-    color: black;
-}
+
 
 .btn2 {
     margin-left: 25px;
@@ -250,3 +336,88 @@ p {
 .patient-details {
     display: inline;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* src/components/DoctorList.css */
+.doctor-name {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-specialty {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.doctor-description {
+    font-size: 0.875rem;
+    color: #333;
+}
+
+.doctor-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+    margin: 50px auto;
+}
+
+/* CSS for the doctor card */
+.doctor-card {
+    width: 270px;
+    height: 345px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 1.1);
+    margin: 25px;
+    margin-bottom: 60px;
+    padding-bottom: 70px;
+
+}
+.doctor-card:hover{
+    background-color: #00b6ff;
+    color: white;
+}
+
+/* CSS for the round doctor image */
+.doctor-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    /* top: -50px;
+    position: relative; */
+}
+.roww{
+    margin: 20px auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.footer{
+    border-top: 2px solid;
+    background: #3657b1;
+    height: 80px;
+    text-align: center;
+    align-content: center;
+}
+.custom-collapse {
+    transition: max-height 0.5s ease;
+    max-height: 0;
+    overflow: hidden;
+  }
+  
+  .custom-collapse.show {
+    max-height: 700px; /* Adjust to a reasonable maximum height */
+  }
+  

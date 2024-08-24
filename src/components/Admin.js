@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Admin = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === 'Ketu' && password === '1212') {
-      setLoggedIn(true);
+    const storedUsername = localStorage.getItem('username');
+    const storedPassword = localStorage.getItem('password');
+    
+    if (username === storedUsername && password === storedPassword) {
       onLogin(); // Notify App component of successful login
       navigate('/home'); // Redirect to home page
     } else {
-      alert('Incorrect username or password');
+      setErrorMessage('Incorrect username or password');
     }
   };
 
   return (
-    <div id='Login' className="new d-flex align-items-center justify-content-center ">
+    <div className="new d-flex align-items-center justify-content-center ">
       <div className="login-form p-4">
         <h2>Admin Login</h2>
         <form onSubmit={handleSubmit}>
@@ -31,8 +33,12 @@ const Admin = ({ onLogin }) => {
             <label>Password:</label>
             <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
+          {errorMessage && <p className="text-danger">{errorMessage}</p>}
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
+        <p className="mt-3">
+          Don't have an account? <Link to="/signup">Sign up</Link>
+        </p>
       </div>
     </div>
   );
