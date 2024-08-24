@@ -22,7 +22,7 @@ const Admin = ({ onLogin }) => {
 
   return (
     <div className="new d-flex align-items-center justify-content-center ">
-      <div className="login-form p-4">
+      <div className="login-form login-form-width login-form-width">
         <h2>Admin Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

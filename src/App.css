@@ -57,6 +57,9 @@
     background-image: url(./img/bg_1.jpg.webp);
     height: 86.5vh;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #addappointment {
@@ -85,8 +88,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: center;
-    align-items: center;
     background-size: cover;
 }
 html{
@@ -94,7 +95,7 @@ html{
 }
 #homeButton,
 #addAppointmentButton {
-    margin: 0 10px;
+    margin: 10px 0px;
     /* Adjust the spacing between the buttons */
 }
 
@@ -107,6 +108,7 @@ form {
     /* justify-content: center; */
     align-items: center;
     display: grid;
+    
 }
 
 h2,
@@ -164,9 +166,9 @@ h3 {
 }
 
 .new {
-    background-color: rgba(0, 0, 0, 0.6);
+    /* background-color: rgba(0, 0, 0, 0.6); */
     color: white;
-    /* margin: 20px  0px; */
+    padding: 60px  0px;
     /* border-radius: 10px; */
 }
 
@@ -175,7 +177,15 @@ h3 {
     border-radius: 10px;
     padding: 20px;
     color: black;
-    height: 70vh;
+    /* height: 70vh; */
+    /* justify-items: center;
+    align-content: center; */
+    box-shadow: -4px 4px 17px 10px rgba(0, 0, 0, 1.1);;
+    /* width: 30%; */
+    padding: 30px 90px;
+}
+.login-form-width{
+    width: 30%;
 }
 
 .btn {
@@ -207,6 +217,8 @@ h3:hover {
     /* Padding around the navbar */
     border-bottom: 1px solid #dee2e6;
     /* Border at the bottom */
+    /* background-image: url(./img/navbar.avif);
+    background-size: cover; */
 }
 
 .navbar-logo {
@@ -420,4 +432,51 @@ html {
   .custom-collapse.show {
     max-height: 700px; /* Adjust to a reasonable maximum height */
   }
-  
+
+  .nav-link.active {
+    background-color: rgba(0, 63, 136, 0.662);
+    color: white !important;
+    border-radius: 5px; /* Optional: to make the background look better */
+  }
+    
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar-logo {
+        height: 60px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+        padding: 0.5rem;
+    }
+
+    .doctor-card {
+        width: 90%;
+    }
+
+    .homeset {
+        width: 80%;
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navbar-logo {
+        height: 50px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        padding: 0.25rem;
+    }
+
+    .doctor-card {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .homeset {
+        width: 100%;
+        padding-left: 10px;
+    }
+}

@@ -203,7 +203,7 @@ const PatientDetails = () => {
       </div>
       <div className="new d-flex align-items-center justify-content-center">
         <Collapse in={isChecked}>
-          <div id="example-collapse-text" className="login-form p-4 custom-collapse">
+          <div id="example-collapse-text" className="login-form login-form-width custom-collapse">
           <h2>{isEditing ? "Edit Patient Details" : "Add Patient Details"}</h2>
             <form id="form" onSubmit={handleSubmit}>
               {/* Personal Details Section */}

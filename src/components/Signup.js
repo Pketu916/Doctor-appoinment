@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -33,7 +33,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-form p-4">
+    <div className="new d-flex align-items-center justify-content-center ">
+    <div className="login-form login-form-width">
       <h2>Sign Up</h2>
       <form onSubmit={handleSignup}>
         <div className="form-group">
@@ -75,6 +76,10 @@ const Signup = () => {
         {errorMessage && <p className="text-danger">{errorMessage}</p>}
         <button type="submit" className="btn btn-primary">Sign Up</button>
       </form>
+      <p className="mt-3">
+      Already have an account<Link to="/login"> Login Here</Link>
+        </p>
+    </div>
     </div>
   );
 };

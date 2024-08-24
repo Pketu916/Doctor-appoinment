@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Collapse } from "react-bootstrap";
 
 const AddAppointment = () => {
   const [appointmentCounter, setAppointmentCounter] = useState(1); // Counter for generating appointment numbers
@@ -8,6 +9,7 @@ const AddAppointment = () => {
   const [doctor, setDoctor] = useState('');
   const [appointments, setAppointments] = useState([]);
   const [sortBy, setSortBy] = useState('date'); // State for sorting criteria
+  const [isChecked, setIsChecked] = useState(false);
 
   // Predefined time slots
   const timeSlots = [
@@ -19,13 +21,12 @@ const AddAppointment = () => {
     '03:00 PM',
   ];
 
-  // Predefined doctors
+  // Updated doctors list
   const doctors = [
-    'Dr. Smith',
-    'Dr. Johnson',
-    'Dr. Williams',
-    'Dr. Jones',
-    'Dr. Brown',
+    'Dr. Lloyd Wilson, Neurologist',
+    'Dr. Rachel Parker, Ophthalmologist',
+    'Dr. Ian Smith, Dentist',
+    'Dr. Alicia Henderson, Pediatrician',
   ];
 
   const handleSubmit = (e) => {
@@ -62,45 +63,73 @@ const AddAppointment = () => {
 
   return (
     <div>
-      <div id='addappointment' className="new d-flex align-items-center justify-content-center">
-        <div className='login-form p-4'>
-          <h2>Add New Appointment</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Appointment Number:</label>
-              <input type="text" className="form-control" value={`AP${appointmentCounter.toString().padStart(4, '0')}`} disabled />
-            </div>
-            <div className="form-group">
-              <label>Patient Name:</label>
-              <input type="text" className="form-control" value={patientName} onChange={(e) => setPatientName(e.target.value)} required />
-            </div>
-            <div className="form-group">
-              <label>Date:</label>
-              <input type="date" className="form-control" value={date} onChange={(e) => setDate(e.target.value)} required />
-            </div>
-            <div className="form-group">
-              <label>Time:</label>
-              <select className="form-control" value={time} onChange={(e) => setTime(e.target.value)} required>
-                <option value="">Select Time Slot</option>
-                {timeSlots.map((slot, index) => (
-                  <option key={index} value={slot}>{slot}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Doctor:</label>
-              <select className="form-control" value={doctor} onChange={(e) => setDoctor(e.target.value)} required>
-                <option value="">Select Doctor</option>
-                {doctors.map((doc, index) => (
-                  <option key={index} value={doc}>{doc}</option>
-                ))}
-              </select>
-            </div>
-            <button type="submit" className="btn btn-primary">Add Appointment</button>
-          </form>
+      <div id="patientDetails" className="container-fluid d-flex align-items-center flex-column">
+        <div className="row">
+          <div className="homeset col-md-6 d-flex flex-column justify-content-center">
+            <h2 className="mb-4">The Most Valuable Thing is Your Health</h2>
+            <p className="pa mb-4">
+              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+            </p>
+            <button type="button" id="homeButton" className="mt-5 btn btn-primary mx-2">
+              Home
+            </button>
+            <button
+              type="button"
+              id="addAppointmentButton"
+              className="btn btn-secondary mx-2"
+              onClick={() => {
+                setIsChecked(prev => !prev); // Toggle the isChecked state
+              }}
+              aria-controls="example-collapse-text"
+              aria-expanded={isChecked} // Reflect the state in aria-expanded attribute
+            >
+              {isChecked ? "Hide Form" : "Add Appointment"}
+            </button>
+          </div>
         </div>
       </div>
+      <div className="new d-flex align-items-center justify-content-center">
+        <Collapse in={isChecked}>
+          <div id="example-collapse-text" className="login-form login-form-width custom-collapse">
 
+            <h2>Add New Appointment</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Appointment Number:</label>
+                <input type="text" className="form-control" value={`AP${appointmentCounter.toString().padStart(4, '0')}`} disabled />
+              </div>
+              <div className="form-group">
+                <label>Patient Name:</label>
+                <input type="text" className="form-control" value={patientName} onChange={(e) => setPatientName(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label>Date:</label>
+                <input type="date" className="form-control" value={date} onChange={(e) => setDate(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label>Time:</label>
+                <select className="form-control" value={time} onChange={(e) => setTime(e.target.value)} required>
+                  <option value="">Select Time Slot</option>
+                  {timeSlots.map((slot, index) => (
+                    <option key={index} value={slot}>{slot}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Doctor:</label>
+                <select className="form-control" value={doctor} onChange={(e) => setDoctor(e.target.value)} required>
+                  <option value="">Select Doctor</option>
+                  {doctors.map((doc, index) => (
+                    <option key={index} value={doc}>{doc}</option>
+                  ))}
+                </select>
+              </div>
+              <button type="submit" className="btn btn-primary">Add Appointment</button>
+            </form>
+          </div>
+
+        </Collapse>
+      </div>
       <div className="mainlist">
         <h3>Appointments List</h3>
         <div className="form-group-sort form-group">
