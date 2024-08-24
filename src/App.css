@@ -187,7 +187,12 @@ h3 {
 .login-form-width{
     width: 30%;
 }
-
+.login{
+    height: 100vh;
+    background-color: #61dafb;
+    background-image: url(./img/login.jpg);
+    background-size: cover;
+}
 .btn {
     color: black;
     background-color: #6488EA;

@@ -21,6 +21,7 @@ const Admin = ({ onLogin }) => {
   };
 
   return (
+    <div className='login'>
     <div className="new d-flex align-items-center justify-content-center ">
       <div className="login-form login-form-width login-form-width">
         <h2>Admin Login</h2>
@@ -40,6 +41,7 @@ const Admin = ({ onLogin }) => {
           Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };
