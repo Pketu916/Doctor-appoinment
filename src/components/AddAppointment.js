@@ -63,14 +63,15 @@ const AddAppointment = () => {
 
   return (
     <div>
-      <div id="patientDetails" className="container-fluid d-flex align-items-center flex-column">
+      <div id="addappointment" className="container-fluid d-flex align-items-center flex-column">
         <div className="row">
           <div className="homeset col-md-6 d-flex flex-column justify-content-center">
-            <h2 className="mb-4">The Most Valuable Thing is Your Health</h2>
+            <h2 className="your-health mb-4">Schedule Your Healing</h2>
             <p className="pa mb-4">
-              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+            Navigate the enchanted forest of appointments with ease. Choose your date, time, and doctor, and set your path to better health with just a few clicks.
             </p>
-            <button type="button" id="homeButton" className="mt-5 btn btn-primary mx-2">
+            <div className="btnset">
+            <button type="button" id="homeButton" className="btn btn-primary mx-2">
               Home
             </button>
             <button
@@ -85,6 +86,7 @@ const AddAppointment = () => {
             >
               {isChecked ? "Hide Form" : "Add Appointment"}
             </button>
+            </div>
           </div>
         </div>
       </div>

@@ -8,9 +8,9 @@ const Home = () => {
     <div id="home" className="container-fluid d-flex align-items-center flex-column">
       <div className="row">
         <div className="homeset col-md-6 d-flex flex-column justify-content-center">
-          <h2 className="mb-4">The Most Valuable Thing is Your Health</h2>
+          <h2 className=" your-health mb-4">The Most Precious Gift: Your Health</h2>
           <p className=" pa mb-4">
-            Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+          In a peaceful land beyond word mountains, our portal awaits to guide you on your journey to wellness. Whether booking an appointment or adding patient details, all paths lead to care and healing.
           </p>
           <div className="homesetbtn mb-4">
             <Link to="/add-appointment" className="btn btn-primary me-2">

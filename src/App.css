@@ -63,8 +63,23 @@
 }
 
 #addappointment {
-    background-image: url(./img/wp2968506-medical-doctor-wallpaper-hd.jpg);
+    background-image: url(./img/usman-yousaf-eUSCGHW-uZw-unsplash.jpg);
     height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+}
+
+#patientDetails {
+    /* background-image: url(./img/wp2789220-doctors-wallpapers.jpg); */
+    background-image: url(./img/diana-polekhina-ZBstHWt9vLc-unsplash.jpg);
+    /* background-size: cover; */
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-size: cover;
 }
 
@@ -80,19 +95,10 @@
     border-top: 2px solid;
 }
 
-#patientDetails {
-    /* background-image: url(./img/wp2789220-doctors-wallpapers.jpg); */
-    background-image: url(./img/bg_1.jpg.webp);
-    /* background-size: cover; */
-    height: 75vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-}
-html{
+html {
     scroll-behavior: smooth;
 }
+
 #homeButton,
 #addAppointmentButton {
     margin: 10px 0px;
@@ -108,7 +114,7 @@ form {
     /* justify-content: center; */
     align-items: center;
     display: grid;
-    
+
 }
 
 h2,
@@ -122,12 +128,23 @@ h3 {
 
 .homeset {
     width: 40%;
-    padding-left: 100px;
+    /* padding-left: 100px; */
+}
+
+.btnset {
+    display: flex;
+    justify-content: center;
+
+}
+
+.patient-details-home {
+    right: -60%;
+    position: relative;
 }
 
 .homesetbtn {
     display: inline-flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .pa {
@@ -168,7 +185,7 @@ h3 {
 .new {
     /* background-color: rgba(0, 0, 0, 0.6); */
     color: white;
-    padding: 60px  0px;
+    padding: 60px 0px;
     /* border-radius: 10px; */
 }
 
@@ -180,19 +197,23 @@ h3 {
     /* height: 70vh; */
     /* justify-items: center;
     align-content: center; */
-    box-shadow: -4px 4px 17px 10px rgba(0, 0, 0, 1.1);;
+    box-shadow: -4px 4px 17px 10px rgba(0, 0, 0, 1.1);
+    ;
     /* width: 30%; */
     padding: 30px 90px;
 }
-.login-form-width{
+
+.login-form-width {
     width: 30%;
 }
-.login{
+
+.login {
     height: 100vh;
     background-color: #61dafb;
     background-image: url(./img/login.jpg);
     background-size: cover;
 }
+
 .btn {
     color: black;
     background-color: #6488EA;
@@ -249,9 +270,9 @@ h3:hover {
 }
 
 .nav-link {
-    color: #343a40;
+    /* color: #343a40; */
     /* Dark text color for links */
-    font-size: 23px;
+    font-size: 25px;
     /* Font size for links */
     padding: 1rem 2rem;
     /* Padding around the link text */
@@ -261,6 +282,7 @@ h3:hover {
     /* Add border with transparent color for default state */
     border-radius: 5px;
     /* Rounded corners */
+    font-weight:500;
 }
 
 .nav-link:hover {
@@ -290,6 +312,7 @@ h3:hover {
 .navbar {
     position: sticky;
     top: 0px;
+    z-index: 1;
 }
 
 
@@ -400,7 +423,8 @@ html {
     padding-bottom: 70px;
 
 }
-.doctor-card:hover{
+
+.doctor-card:hover {
     background-color: #00b6ff;
     color: white;
 }
@@ -415,35 +439,53 @@ html {
     /* top: -50px;
     position: relative; */
 }
-.roww{
+
+.roww {
     margin: 20px auto;
     width: 80%;
     display: flex;
     justify-content: space-between;
 }
-.footer{
+
+.footer {
     border-top: 2px solid;
     background: #3657b1;
     height: 80px;
     text-align: center;
     align-content: center;
 }
+
 .custom-collapse {
     transition: max-height 0.5s ease;
     max-height: 0;
     overflow: hidden;
-  }
-  
-  .custom-collapse.show {
-    max-height: 700px; /* Adjust to a reasonable maximum height */
-  }
+}
 
-  .nav-link.active {
-    background-color: rgba(0, 63, 136, 0.662);
+.custom-collapse.show {
+    max-height: 700px;
+    /* Adjust to a reasonable maximum height */
+}
+
+/* .nav-link.active {
     color: white !important;
-    border-radius: 5px; /* Optional: to make the background look better */
-  }
-    
+    border-radius: 5px;
+    animation: sirenEffect 1s infinite;
+} */
+
+@keyframes sirenEffect {
+    0% {
+        background-color: red;
+    }
+
+    50% {
+        background-color: blue;
+    }
+
+    100% {
+        background-color: red;
+    }
+}
+
 /* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .navbar-logo {
@@ -484,4 +526,42 @@ html {
         width: 100%;
         padding-left: 10px;
     }
+}
+
+@keyframes pulse {
+    0% {
+        color: red;
+    }
+
+    20% {
+        color: green;
+    }
+
+    40% {
+        color: rgb(255, 196, 2);
+    }
+
+    60% {
+        color: blue;
+    }
+}
+
+.your-health {
+    /* font-size: 24px; */
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+.nav-item .nav-link {
+    color: #000;
+    /* Default color */
+    transition: color 0.5s;
+}
+
+.red {
+    color: red !important;
+}
+
+.blue {
+    color: blue !important;
 }

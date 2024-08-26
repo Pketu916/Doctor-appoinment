@@ -1,16 +1,21 @@
 import React from "react";
+import Logo from '../img/logo.png';
 
 const Footer = () => {
   return (
     <footer className="bgfooter text-center text-lg-start">
       <div className="container p-4">
         <div className="roww row">
-          {/* DrPRO Section */}
+
+        {/* <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <img src={Logo} alt="Logo" className="navbar-logo" />
+          </div> */}
+
           <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 className="text-uppercase">DrPRO</h5>
+            <h5 className="text-uppercase">MediManager:</h5>
             <p>
-              Plastic Surgery <br />
-              Nulla facilisi. Nulla egestas vel lacus sed interdum. Sed mollis, orci elementum eleifend tempor, nunc libero porttitor tellus.
+              Your Health, Simplified <br />
+              MediManager seamlessly guides you through managing appointments and patient records, making your health journey effortless.
             </p>
           </div>
 
@@ -40,9 +45,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
-      <div className=" footer text-center p-3"> 
-        ©2024 Doctor Appointment 
+
+      <div className=" footer text-center p-3">
+        ©2024 Doctor Appointment
       </div>
     </footer>
   );
