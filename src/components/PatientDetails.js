@@ -180,33 +180,33 @@ const PatientDetails = () => {
           <div className="patient-details-home homeset col-md-6 d-flex flex-column justify-content-center">
             <h2 className="your-health mb-4">Your Health Story</h2>
             <p className="pa mb-4">
-            In the quiet grove, add your details to the Book of Health. Each entry is a step in your journey, carefully recorded to ensure personalized care.
+              In the quiet grove, add your details to the Book of Health. Each entry is a step in your journey, carefully recorded to ensure personalized care.
             </p>
             <div className="btnset">
-            <button type="button" id="homeButton" className="btn btn-primary mx-2">
-              Home
-            </button>
-            <button
-              type="button"
-              id="addAppointmentButton"
-              className="btn btn-secondary mx-2"
-              onClick={() => {
-                // handleButtonClick();
-                setIsChecked(prev => !prev); // Toggle the isChecked state
-              }}
-              aria-controls="example-collapse-text"
-              aria-expanded={isChecked} // Reflect the state in aria-expanded attribute
-            >
-              {isChecked ? "Hide Form" : "Add Patient"}
-            </button>
+              <button type="button" id="homeButton" className="btn btn-primary mx-2">
+                Home
+              </button>
+              <button
+                type="button"
+                id="addAppointmentButton"
+                className="btn btn-secondary mx-2"
+                onClick={() => {
+                  // handleButtonClick();
+                  setIsChecked(prev => !prev); // Toggle the isChecked state
+                }}
+                aria-controls="example-collapse-text"
+                aria-expanded={isChecked} // Reflect the state in aria-expanded attribute
+              >
+                {isChecked ? "Hide Form" : "Add Patient"}
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="new d-flex align-items-center justify-content-center">
+      <div className="new1 d-flex align-items-center justify-content-center">
         <Collapse in={isChecked}>
           <div id="example-collapse-text" className="login-form login-form-width custom-collapse">
-          <h2>{isEditing ? "Edit Patient Details" : "Add Patient Details"}</h2>
+            <h2>{isEditing ? "Edit Details" : "Add Details"}</h2>
             <form id="form" onSubmit={handleSubmit}>
               {/* Personal Details Section */}
               <Collapse in={openSections[0]}>
@@ -233,7 +233,7 @@ const PatientDetails = () => {
                     <label>Date of Birth:</label>
                     <input type="date" className="form-control" name="dob" value={patientData.dob} onChange={handleInputChange} required />
                   </div>
-                  <button type="button" className="btn btn-primary" onClick={() => goToNextSection(0)}>Next</button>
+                  <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(0)}>Next</button>
                 </div>
               </Collapse>
 
@@ -257,8 +257,8 @@ const PatientDetails = () => {
                     <label>Emergency Contact:</label>
                     <input type="text" className="form-control" name="emergencyContact" value={patientData.emergencyContact} onChange={handleInputChange} required />
                   </div>
-                  <button type="button" className="btn btn-secondary" onClick={() => goToPreviousSection(1)}>Previous</button>
-                  <button type="button" className="btn btn-primary" onClick={() => goToNextSection(1)}>Next</button>
+                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(1)}>Previous</button>
+                  <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(1)}>Next</button>
                 </div>
               </Collapse>
 
@@ -282,8 +282,8 @@ const PatientDetails = () => {
                     <label>Current Medications:</label>
                     <input type="text" className="form-control" name="currentMedications" value={patientData.currentMedications} onChange={handleInputChange} />
                   </div>
-                  <button type="button" className="btn btn-secondary" onClick={() => goToPreviousSection(2)}>Previous</button>
-                  <button type="button" className="btn btn-primary" onClick={() => goToNextSection(2)}>Next</button>
+                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(2)}>Previous</button>
+                  <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(2)}>Next</button>
                 </div>
               </Collapse>
 
@@ -299,8 +299,8 @@ const PatientDetails = () => {
                     <label>Doctor Name:</label>
                     <input type="text" className="form-control" name="doctorName" value={patientData.doctorName} onChange={handleInputChange} />
                   </div>
-                  <button type="button" className="btn btn-secondary" onClick={() => goToPreviousSection(3)}>Previous</button>
-                  <button type="button" className="btn btn-primary" onClick={() => goToNextSection(3)}>Next</button>
+                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(3)}>Previous</button>
+                  <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(3)}>Next</button>
                 </div>
               </Collapse>
 
@@ -320,8 +320,8 @@ const PatientDetails = () => {
                     <label>Coverage Details:</label>
                     <input type="text" className="form-control" name="coverageDetails" value={patientData.coverageDetails} onChange={handleInputChange} />
                   </div>
-                  <button type="button" className="btn btn-secondary" onClick={() => goToPreviousSection(4)}>Previous</button>
-                  <button type="button" className="btn btn-primary" onClick={() => goToNextSection(4)}>Next</button>
+                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(4)}>Previous</button>
+                  <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(4)}>Next</button>
                 </div>
               </Collapse>
 
@@ -341,7 +341,7 @@ const PatientDetails = () => {
                     <label>Additional Observations:</label>
                     <textarea className="form-control" name="additionalObservations" value={patientData.additionalObservations} onChange={handleInputChange}></textarea>
                   </div>
-                  <button type="button" className="btn btn-secondary" onClick={() => goToPreviousSection(5)}>Previous</button>
+                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(5)}>Previous</button>
                 </div>
               </Collapse>
               <button type="submit" className="btn btn-primary mt-3">
@@ -355,23 +355,27 @@ const PatientDetails = () => {
       {/* Patients List */}
       <div className="mainlist">
         <h3>Patients List</h3>
-        <div className="form-group-sort form-group">
+
+        <div className="sort">
           <div>
-            <label>Sort by:</label>
-            <select className="form-control" value={sortBy} onChange={handleSortChange}>
-              <option value="caseNumber">Case Number</option>
-              <option value="name">Patient Name</option>
-            </select>
-
-            <label>Order:</label>
-            <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
-              <option value="ascending">Ascending</option>
-              <option value="descending">Descending</option>
-            </select>
-
-            {/* Render sorted patients here */}
+          <label>Sort by:</label>
+          <select className="form-control" value={sortBy} onChange={handleSortChange}>
+            <option value="caseNumber">Case Number</option>
+            <option value="name">Patient Name</option>
+          </select>
           </div>
+          <div>
+          <label>Order:</label>
+          <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+          </select>
+          </div>
+
+
+          {/* Render sorted patients here */}
         </div>
+
         <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
           <table className="table table-bordered">
             <thead>

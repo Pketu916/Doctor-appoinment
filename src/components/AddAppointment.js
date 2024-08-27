@@ -90,7 +90,7 @@ const AddAppointment = () => {
           </div>
         </div>
       </div>
-      <div className="new d-flex align-items-center justify-content-center">
+      <div className="new1 d-flex align-items-center justify-content-center">
         <Collapse in={isChecked}>
           <div id="example-collapse-text" className="login-form login-form-width custom-collapse">
 
@@ -134,13 +134,15 @@ const AddAppointment = () => {
       </div>
       <div className="mainlist">
         <h3>Appointments List</h3>
-        <div className="form-group-sort form-group">
+        <div className='sort'>
+          <div>
           <label>Sort by:</label>
           <select className="form-control" value={sortBy} onChange={handleSortChange}>
             <option value="date">Date</option>
             <option value="time">Time</option>
             <option value="patientName">Patient Name</option>
           </select>
+          </div>
         </div>
         <ul className="listtable">
           {sortedAppointments.map((appointment, index) => (

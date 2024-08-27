@@ -32,8 +32,19 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
-        <img src={Logo} alt="Logo" className="navbar-logo" />
-        <NavLink className="navbar-brand" to="/">MediManage</NavLink>
+        <img src={Logo} alt="Logo" to="/" className="navbar-logo" />
+        <NavLink
+          className="navbar-brand"
+          style={{
+            fontWeight: '500',
+            fontFamily: 'monospace',
+            fontSize: '29px'
+          }}
+          to="/"
+        >
+          MediManage
+        </NavLink>
+
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
