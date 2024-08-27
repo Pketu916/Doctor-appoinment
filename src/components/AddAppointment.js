@@ -23,11 +23,16 @@ const AddAppointment = () => {
 
   // Updated doctors list
   const doctors = [
-    'Dr. Lloyd Wilson, Neurologist',
-    'Dr. Rachel Parker, Ophthalmologist',
-    'Dr. Ian Smith, Dentist',
-    'Dr. Alicia Henderson, Pediatrician',
+    'Dr. Arjun Gupta, Neurologist',           // Male
+    'Dr. Priya Sharma, Ophthalmologist',      // Female
+    'Dr. Karan Verma, Dentist',               // Male
+    'Dr. Neha Singh, Pediatrician',           // Female
+    'Dr. Aditi Patel, Cardiologist',          // Female
+    'Dr. Rohan Mehta, Orthopedic Surgeon',    // Male
+    'Dr. Varun Patel, Dermatologist',           // Male
+    'Dr. Deepak Agarwal, Endocrinologist'        // Female
   ];
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
