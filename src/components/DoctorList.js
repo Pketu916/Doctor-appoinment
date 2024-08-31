@@ -28,10 +28,10 @@ const DoctorList = () => {
     { name: "Dr. Priya Sharma", specialty: "Ophthalmologist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc2 },
     { name: "Dr. Karan Verma", specialty: "Dentist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc3 },
     { name: "Dr. Neha Singh", specialty: "Pediatrician", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc4 },
-    { name: "Dr. Aditi Patel", specialty: "Cardiologist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc5 },
-    { name: "Dr. Rohan Mehta", specialty: "Orthopedic Surgeon", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc6 },
-    { name: "Dr. Varun Patel", specialty: "Dermatologist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc7 },
-    { name: "Dr. Deepak Agarwal", specialty: "Endocrinologist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc8 }
+    { name: "Dr. Aditi Patel", specialty: "Neurologist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc5 },
+    { name: "Dr. Rohan Mehta", specialty: "Ophthalmologist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc6 },
+    { name: "Dr. Varun Patel", specialty: "Dentist", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc7 },
+    { name: "Dr. Deepak Agarwal", specialty: "Pediatrician", description: "I am an ambitious workaholic, but apart from that, pretty simple person.", imgSrc: doc8 }
 ];
 
 

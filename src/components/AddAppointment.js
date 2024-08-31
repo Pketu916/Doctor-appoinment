@@ -24,13 +24,13 @@ const AddAppointment = () => {
   // Updated doctors list
   const doctors = [
     'Dr. Arjun Gupta, Neurologist',           // Male
+    'Dr. Aditi Patel, Neurologist',          // Female
     'Dr. Priya Sharma, Ophthalmologist',      // Female
+    'Dr. Rohan Mehta, Ophthalmologist ',    // Male
     'Dr. Karan Verma, Dentist',               // Male
+    'Dr. Varun Patel, Dentist',            // Male
     'Dr. Neha Singh, Pediatrician',           // Female
-    'Dr. Aditi Patel, Cardiologist',          // Female
-    'Dr. Rohan Mehta, Orthopedic Surgeon',    // Male
-    'Dr. Varun Patel, Dermatologist',           // Male
-    'Dr. Deepak Agarwal, Endocrinologist'        // Female
+    'Dr. Deepak Agarwal, Pediatrician'        // Female
   ];
   
 
