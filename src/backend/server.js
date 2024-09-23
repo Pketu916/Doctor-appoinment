@@ -7,10 +7,7 @@ const app = express();
 app.use(express.json()); 
 app.use(cors()); 
 
-mongoose.connect('mongodb+srv://pketu916:9265@cluster0.lyp2n.mongodb.net/hospitalDB?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect('mongodb+srv://pketu916:9265@cluster0.lyp2n.mongodb.net/hospitalDB?retryWrites=true&w=majority')
 .then(() => console.log('Connected to MongoDB'))
 .catch((error) => console.error('MongoDB connection error:', error));
 

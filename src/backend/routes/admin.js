@@ -1,16 +1,34 @@
-// backend/routes/admin.js
-
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/user'); // Correct model path
 
 const JWT_SECRET = 'your_jwt_secret_key'; // Replace with your actual secret key
 
+// Validate Email
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+// Validate Phone Number
+const validatePhone = (phone) => {
+  return phone.length === 10 && !isNaN(phone); // Example: ensure it's 10 digits
+};
+
 // Sign-Up route
 router.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, name, phone, email } = req.body; // Accept additional fields
+
+  // Validate Email and Phone Number
+  if (!validateEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email format' });
+  }
+
+  if (!validatePhone(phone)) {
+    return res.status(400).json({ message: 'Invalid phone number' });
+  }
 
   try {
     // Check if the username already exists
@@ -22,10 +40,13 @@ router.post('/signup', async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user
+    // Create a new user with additional fields
     const newUser = new User({
       username,
-      password: hashedPassword
+      password: hashedPassword,
+      name,  // Add name
+      phone, // Add phone number
+      email  // Add email
     });
     await newUser.save();
 

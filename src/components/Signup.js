@@ -6,6 +6,9 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [name, setName] = useState(''); // New field
+  const [phone, setPhone] = useState(''); // New field
+  const [email, setEmail] = useState(''); // New field
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -31,10 +34,13 @@ const Signup = () => {
     }
 
     try {
-      // await axios.post('http://localhost:3000/Signup', { username, password });
-      // Signup.js
-
-      await axios.post('http://localhost:3000/api/admin/signup', { username, password });
+      await axios.post('http://localhost:3000/api/admin/signup', { 
+        username, 
+        password, 
+        name, 
+        phone, 
+        email 
+      });
 
       navigate('/login');
     } catch (error) {
@@ -47,6 +53,36 @@ const Signup = () => {
       <form className="new d-flex align-items-center justify-content-center " onSubmit={handleSignup}>
         <div className="login-form login-form-width">
           <h2>Sign Up</h2>
+          <div className="form-group">
+            <label>Name:</label>
+            <input
+              type="text"
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Phone Number:</label>
+            <input
+              type="tel"
+              className="form-control"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Email ID:</label>
+            <input
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
           <div className="form-group">
             <label>Username:</label>
             <input
@@ -92,7 +128,7 @@ const Signup = () => {
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
           <button type="submit" className="btn btn-primary">Sign Up</button>
           <p className="mt-3">
-            Already have an account<Link to="/login"> Login Here</Link>
+            Already have an account? <Link to="/login">Login Here</Link>
           </p>
         </div>
       </form>
