@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Collapse } from "react-bootstrap";
-// import Collapse from 'react-bootstrap/Collapse';
 
 const PatientDetails = () => {
   const [caseCounter, setCaseCounter] = useState(1);
@@ -33,61 +32,51 @@ const PatientDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [error, setError] = useState("");
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [expandedPatientIndex, setExpandedPatientIndex] = useState(null);
+
+  const fetchPatients = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/patients");
+      const data = await response.json();
+      setPatients(data);
+    } catch (err) {
+      setError("Failed to fetch patients.");
+    }
+  };
+
+  useEffect(() => {
+    fetchPatients();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPatientData({ ...patientData, [name]: value });
   };
 
-  const validateSection = (sectionIndex) => {
-    let isValid = true;
-    setError("");
-
-    switch (sectionIndex) {
-      case 0: // Personal Information section
-        if (!patientData.name || !patientData.age || !patientData.gender || !patientData.dob) {
-          setError("Please fill in all required fields.");
-          isValid = false;
-        }
-        break;
-      case 1: // Contact Information section
-        if (!patientData.phone || !patientData.emergencyContact) {
-          setError("Please fill in all required fields.");
-          isValid = false;
-        }
-        break;
-      case 2: // Medical History section
-        // No required fields here, but you can add if necessary
-        break;
-      case 3: // Appointment History section
-        // No required fields here, but you can add if necessary
-        break;
-      case 4: // Insurance Information section
-        // No required fields here, but you can add if necessary
-        break;
-      default:
-        break;
-    }
-
-    return isValid;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isEditing) {
-      const updatedPatients = patients.map((patient, index) =>
-        index === editingIndex ? { ...patientData, caseNumber: patient.caseNumber } : patient
-      );
-      setPatients(updatedPatients);
-      setIsEditing(false);
-      setEditingIndex(null);
-    } else {
-      const newPatient = { caseNumber: `CN${caseCounter.toString().padStart(4, "0")}`, ...patientData };
-      setPatients([...patients, newPatient]);
-      setCaseCounter(caseCounter + 1);
+    try {
+      if (isEditing) {
+        await fetch(`http://localhost:3000/api/patients/${patientData.caseNumber}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(patientData),
+        });
+      } else {
+        const newPatient = { caseNumber: `CN${caseCounter.toString().padStart(4, "0")}`, ...patientData };
+        await fetch("http://localhost:3000/api/patients", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newPatient),
+        });
+        setCaseCounter(caseCounter + 1);
+      }
+      resetForm();
+      fetchPatients();
+    } catch (error) {
+      setError("An error occurred while submitting data.");
     }
-    resetForm();
   };
 
   const resetForm = () => {
@@ -114,34 +103,53 @@ const PatientDetails = () => {
       additionalObservations: "",
     });
     setOpenSections([true, false, false, false, false, false]);
+    setIsEditing(false);
+    setEditingIndex(null);
   };
-
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
-  };
-
-  const handleOrderChange = (e) => {
-    setSortOrder(e.target.value);
-  };
-
-  const sortedPatients = [...patients].sort((a, b) => {
-    let comparison = 0;
-
-    if (sortBy === "caseNumber") {
-      comparison = a.caseNumber.localeCompare(b.caseNumber);
-    } else if (sortBy === "name") {
-      comparison = a.name.localeCompare(b.name);
-    }
-
-    return sortOrder === "ascending" ? comparison : -comparison;
-  });
 
   const handleEditPatient = (index) => {
     const patientToEdit = patients[index];
     setPatientData(patientToEdit);
     setIsEditing(true);
     setEditingIndex(index);
-    setOpenSections([true, false, false, false, false, false]); // Open first section for editing
+    setOpenSections([true, false, false, false, false, false]);
+  };
+
+  const toggleExpandedPatient = (index) => {
+    setExpandedPatientIndex(expandedPatientIndex === index ? null : index);
+  };
+
+  const sortedPatients = [...patients].sort((a, b) => {
+    let comparison = 0;
+    if (sortBy === "caseNumber") {
+      comparison = a.caseNumber.localeCompare(b.caseNumber);
+    } else if (sortBy === "name") {
+      comparison = a.name.localeCompare(b.name);
+    }
+    return sortOrder === "ascending" ? comparison : -comparison;
+  });
+
+  const validateSection = (sectionIndex) => {
+    let isValid = true;
+    setError("");
+
+    switch (sectionIndex) {
+      case 0:
+        if (!patientData.name || !patientData.age || !patientData.gender || !patientData.dob) {
+          setError("Please fill in all required fields.");
+          isValid = false;
+        }
+        break;
+      case 1:
+        if (!patientData.phone || !patientData.emergencyContact) {
+          setError("Please fill in all required fields.");
+          isValid = false;
+        }
+        break;
+      default:
+        break;
+    }
+    return isValid;
   };
 
   const goToNextSection = (currentIndex) => {
@@ -168,11 +176,6 @@ const PatientDetails = () => {
     });
   };
 
-  // const handleButtonClick = () => {
-  //   // Scroll to the form with the specified ID
-  //   document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
-  // };
-
   return (
     <div>
       <div id="patientDetails" className="container-fluid d-flex align-items-center flex-column">
@@ -190,12 +193,9 @@ const PatientDetails = () => {
                 type="button"
                 id="addAppointmentButton"
                 className="btn btn-secondary mx-2"
-                onClick={() => {
-                  // handleButtonClick();
-                  setIsChecked(prev => !prev); // Toggle the isChecked state
-                }}
+                onClick={() => setIsChecked(prev => !prev)}
                 aria-controls="example-collapse-text"
-                aria-expanded={isChecked} // Reflect the state in aria-expanded attribute
+                aria-expanded={isChecked}
               >
                 {isChecked ? "Hide Form" : "Add Patient"}
               </button>
@@ -203,6 +203,7 @@ const PatientDetails = () => {
           </div>
         </div>
       </div>
+
       <div className="new1 d-flex align-items-center justify-content-center">
         <Collapse in={isChecked}>
           <div id="example-collapse-text" className="login-form login-form-width custom-collapse">
@@ -250,14 +251,14 @@ const PatientDetails = () => {
                     <input type="text" className="form-control" name="phone" value={patientData.phone} onChange={handleInputChange} required />
                   </div>
                   <div className="form-group">
-                    <label>Email Address:</label>
+                    <label>Email:</label>
                     <input type="email" className="form-control" name="email" value={patientData.email} onChange={handleInputChange} />
                   </div>
                   <div className="form-group">
                     <label>Emergency Contact:</label>
                     <input type="text" className="form-control" name="emergencyContact" value={patientData.emergencyContact} onChange={handleInputChange} required />
                   </div>
-                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(1)}>Previous</button>
+                  <button type="button" className="btnprev btn btn-secondary" onClick={() => goToPreviousSection(1)}>Previous</button>
                   <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(1)}>Next</button>
                 </div>
               </Collapse>
@@ -265,24 +266,23 @@ const PatientDetails = () => {
               {/* Medical History Section */}
               <Collapse in={openSections[2]}>
                 <div>
-                  {error && <div className="alert alert-danger">{error}</div>}
                   <div className="form-group">
                     <label>Past Diagnoses:</label>
-                    <input type="text" className="form-control" name="pastDiagnoses" value={patientData.pastDiagnoses} onChange={handleInputChange} />
+                    <textarea className="form-control" name="pastDiagnoses" value={patientData.pastDiagnoses} onChange={handleInputChange}></textarea>
                   </div>
                   <div className="form-group">
                     <label>Surgeries:</label>
-                    <input type="text" className="form-control" name="surgeries" value={patientData.surgeries} onChange={handleInputChange} />
+                    <textarea className="form-control" name="surgeries" value={patientData.surgeries} onChange={handleInputChange}></textarea>
                   </div>
                   <div className="form-group">
                     <label>Allergies:</label>
-                    <input type="text" className="form-control" name="allergies" value={patientData.allergies} onChange={handleInputChange} />
+                    <textarea className="form-control" name="allergies" value={patientData.allergies} onChange={handleInputChange}></textarea>
                   </div>
                   <div className="form-group">
                     <label>Current Medications:</label>
-                    <input type="text" className="form-control" name="currentMedications" value={patientData.currentMedications} onChange={handleInputChange} />
+                    <textarea className="form-control" name="currentMedications" value={patientData.currentMedications} onChange={handleInputChange}></textarea>
                   </div>
-                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(2)}>Previous</button>
+                  <button type="button" className="btnprev btn btn-secondary" onClick={() => goToPreviousSection(2)}>Previous</button>
                   <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(2)}>Next</button>
                 </div>
               </Collapse>
@@ -290,7 +290,6 @@ const PatientDetails = () => {
               {/* Appointment History Section */}
               <Collapse in={openSections[3]}>
                 <div>
-                  {error && <div className="alert alert-danger">{error}</div>}
                   <div className="form-group">
                     <label>Appointment Date:</label>
                     <input type="date" className="form-control" name="appointmentDate" value={patientData.appointmentDate} onChange={handleInputChange} />
@@ -299,7 +298,7 @@ const PatientDetails = () => {
                     <label>Doctor Name:</label>
                     <input type="text" className="form-control" name="doctorName" value={patientData.doctorName} onChange={handleInputChange} />
                   </div>
-                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(3)}>Previous</button>
+                  <button type="button" className="btnprev btn btn-secondary" onClick={() => goToPreviousSection(3)}>Previous</button>
                   <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(3)}>Next</button>
                 </div>
               </Collapse>
@@ -307,7 +306,6 @@ const PatientDetails = () => {
               {/* Insurance Information Section */}
               <Collapse in={openSections[4]}>
                 <div>
-                  {error && <div className="alert alert-danger">{error}</div>}
                   <div className="form-group">
                     <label>Insurance Provider:</label>
                     <input type="text" className="form-control" name="insuranceProvider" value={patientData.insuranceProvider} onChange={handleInputChange} />
@@ -318,9 +316,9 @@ const PatientDetails = () => {
                   </div>
                   <div className="form-group">
                     <label>Coverage Details:</label>
-                    <input type="text" className="form-control" name="coverageDetails" value={patientData.coverageDetails} onChange={handleInputChange} />
+                    <textarea className="form-control" name="coverageDetails" value={patientData.coverageDetails} onChange={handleInputChange}></textarea>
                   </div>
-                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(4)}>Previous</button>
+                  <button type="button" className="btnprev btn btn-secondary" onClick={() => goToPreviousSection(4)}>Previous</button>
                   <button type="button" className="btnnext btn btn-primary" onClick={() => goToNextSection(4)}>Next</button>
                 </div>
               </Collapse>
@@ -328,7 +326,6 @@ const PatientDetails = () => {
               {/* Notes and Other Sections */}
               <Collapse in={openSections[5]}>
                 <div>
-                  {error && <div className="alert alert-danger">{error}</div>}
                   <div className="form-group">
                     <label>Doctor's Notes:</label>
                     <textarea className="form-control" name="doctorsNotes" value={patientData.doctorsNotes} onChange={handleInputChange}></textarea>
@@ -341,105 +338,50 @@ const PatientDetails = () => {
                     <label>Additional Observations:</label>
                     <textarea className="form-control" name="additionalObservations" value={patientData.additionalObservations} onChange={handleInputChange}></textarea>
                   </div>
-                  <button type="button" className="btnnext btn btn-secondary" onClick={() => goToPreviousSection(5)}>Previous</button>
+                  <button type="button" className="btnprev btn btn-secondary" onClick={() => goToPreviousSection(5)}>Previous</button>
                 </div>
               </Collapse>
-              <button type="submit" className="btn btn-primary mt-3">
-                {isEditing ? "Update Patient Details" : "Add Patient Details"}
-              </button>
+                  <button type="submit" className="btn btn-primary">{isEditing ? "Update" : "Submit"}</button>
             </form>
           </div>
         </Collapse>
       </div>
 
       {/* Patients List */}
-      <div className="mainlist">
-        <h3>Patients List</h3>
-
-        <div className="sort">
-          <div>
-          <label>Sort by:</label>
-          <select className="form-control" value={sortBy} onChange={handleSortChange}>
+      <div className="patient-list">
+        <h3>Patient List</h3>
+        <div className="sort" >
+          <label htmlFor="sortOrder">Sort By:</label>
+          <select  className="form-control" id="sortOrder" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="caseNumber">Case Number</option>
-            <option value="name">Patient Name</option>
+            <option value="name">Name</option>
           </select>
-          </div>
-          <div>
-          <label>Order:</label>
-          <select className="form-control" value={sortOrder} onChange={handleOrderChange}>
+
+          <label htmlFor="sortOrderDirection">Sort Order:</label>
+          <select  className="form-control" id="sortOrderDirection" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
             <option value="ascending">Ascending</option>
             <option value="descending">Descending</option>
           </select>
-          </div>
-
-
-          {/* Render sorted patients here */}
         </div>
-
-        <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th style={{ width: '80px' }}>Case Number</th>
-                <th style={{ width: '150px' }}>Name</th>
-                <th style={{ width: '50px' }}>Age</th>
-                <th style={{ width: '80px' }}>Gender</th>
-                <th style={{ width: '120px' }}>Date of Birth</th>
-                <th style={{ width: '200px' }}>Address</th>
-                <th style={{ width: '120px' }}>Phone Number</th>
-                <th style={{ width: '150px' }}>Email</th>
-                <th style={{ width: '150px' }}>Emergency Contact</th>
-                <th style={{ width: '150px' }}>Past Diagnoses</th>
-                <th style={{ width: '150px' }}>Surgeries</th>
-                <th style={{ width: '150px' }}>Allergies</th>
-                <th style={{ width: '150px' }}>Current Medications</th>
-                <th style={{ width: '120px' }}>Appointment Date</th>
-                <th style={{ width: '150px' }}>Doctor Name</th>
-                <th style={{ width: '150px' }}>Insurance Provider</th>
-                <th style={{ width: '150px' }}>Policy Number</th>
-                <th style={{ width: '150px' }}>Coverage Details</th>
-                <th style={{ width: '150px' }}>Doctor's Notes</th>
-                <th style={{ width: '150px' }}>Patient Notes</th>
-                <th style={{ width: '150px' }}>Additional Observations</th>
-                <th style={{ width: '100px' }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedPatients.map((patient, index) => (
-                <tr key={index}>
-                  <td>{patient.caseNumber}</td>
-                  <td>{patient.name}</td>
-                  <td>{patient.age} years old</td>
-                  <td>{patient.gender}</td>
-                  <td>{patient.dob}</td>
-                  <td>{patient.address}</td>
-                  <td>{patient.phone}</td>
-                  <td>{patient.email}</td>
-                  <td>{patient.emergencyContact}</td>
-                  <td>{patient.pastDiagnoses}</td>
-                  <td>{patient.surgeries}</td>
-                  <td>{patient.allergies}</td>
-                  <td>{patient.currentMedications}</td>
-                  <td>{patient.appointmentDate}</td>
-                  <td>{patient.doctorName}</td>
-                  <td>{patient.insuranceProvider}</td>
-                  <td>{patient.policyNumber}</td>
-                  <td>{patient.coverageDetails}</td>
-                  <td>{patient.doctorsNotes}</td>
-                  <td>{patient.patientNotes}</td>
-                  <td>{patient.additionalObservations}</td>
-                  <td>
-                    <button className="btn btn-warning" onClick={() => handleEditPatient(index)}>Edit</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ul className="list-group">
+          {sortedPatients.map((patient, index) => (
+            <li key={index} className="list-group-item">
+              <div onClick={() => toggleExpandedPatient(index)}>
+                {patient.caseNumber} - {patient.name}
+              </div>
+              <Collapse in={expandedPatientIndex === index}>
+                <div>
+                  <div>{`Age: ${patient.age}`}</div>
+                  <div>{`Gender: ${patient.gender}`}</div>
+                  <div>{`Phone: ${patient.phone}`}</div>
+                  <button type="button" className="btn btn-secondary" onClick={() => handleEditPatient(index)}>Edit</button>
+                </div>
+              </Collapse>
+            </li>
+          ))}
+        </ul>
       </div>
-
-    </div >
-
+    </div>
   );
 };
 

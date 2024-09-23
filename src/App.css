@@ -189,7 +189,8 @@ h3 {
     padding: 60px 0px;
     /* border-radius: 10px; */
 }
-.new1{
+
+.new1 {
     padding-top: 20px;
 }
 
@@ -238,7 +239,11 @@ h2:hover,
 h3:hover {
     color: red;
 }
-.btnnext{
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: red;
+}
+
+.btnnext {
     margin: 20px 35px 0px 0px;
 
 }
@@ -325,13 +330,14 @@ h3:hover {
 
 
 
-/* .navbar-brand {
-    left: 50px;
+.navbar-brand {
+    /* left: 50px;
     color: green;
-    font-weight: bold;
     position: absolute;
-    font-size: 23px;
-} */
+    font-size: 23px; */
+    animation: pulse 2s infinite;
+    font-weight: bold;
+}
 
 .bgfooter {
     background-color: #6488EA;
@@ -474,25 +480,6 @@ html {
     /* Adjust to a reasonable maximum height */
 }
 
-/* .nav-link.active {
-    color: white !important;
-    border-radius: 5px;
-    animation: sirenEffect 1s infinite;
-} */
-
-@keyframes sirenEffect {
-    0% {
-        background-color: red;
-    }
-
-    50% {
-        background-color: blue;
-    }
-
-    100% {
-        background-color: red;
-    }
-}
 
 /* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
@@ -560,19 +547,7 @@ html {
     animation: pulse 2s infinite;
 }
 
-.nav-item .nav-link {
-    color: #000;
-    /* Default color */
-    transition: color 0.5s;
-}
 
-.red {
-    color: red !important;
-}
-
-.blue {
-    color: blue !important;
-}
 .sort {
     display: flex;
     justify-content: center;
@@ -583,25 +558,30 @@ html {
     width: 500px;
 }
 
-  
-  .sort > div {
+
+.sort>div {
     display: contents;
-  }
-  
-  .sort label {
-    margin-bottom: 5px; /* Space between label and select */
-  }
-  
-  .form-control {
+}
+
+.sort label {
+    margin-bottom: 5px;
+    /* Space between label and select */
+}
+
+.form-control {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-  }
-  
-  .form-control:focus {
+}
+
+.form-control:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 0 2px rgba(129, 0, 0, 0.2);
-  }
-  
+}
+
+.list-group {
+    margin: 40px auto;
+    width: 70%;
+}
