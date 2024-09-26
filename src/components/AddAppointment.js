@@ -70,13 +70,19 @@ const AddAppointment = () => {
 
   const handleDelete = async (index, id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/appointments/${id}`);
-      const updatedAppointments = appointments.filter((_, i) => i !== index);
-      setAppointments(updatedAppointments);
+      console.log(`Deleting appointment with ID: ${id}`);  // Verify ID here
+      const response = await axios.delete(`http://localhost:3000/api/appointments/${id}`);
+      if (response.status === 200) {
+        const updatedAppointments = appointments.filter((_, i) => i !== index);
+        setAppointments(updatedAppointments);
+      } else {
+        console.error('Failed to delete appointment');
+      }
     } catch (error) {
       console.error('Error deleting appointment:', error);
     }
   };
+  
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
