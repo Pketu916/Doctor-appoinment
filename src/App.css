@@ -317,6 +317,10 @@ h3:hover {
     /* Color on hover */
     text-decoration: underline;
     /* Underline on hover */
+    scale: 1.2;
+    /* transition: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    margin: 0px 20px;
+    transition: 0.5s;
 }
 
 .nav-link::after {
