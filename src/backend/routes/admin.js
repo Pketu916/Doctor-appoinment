@@ -1,8 +1,9 @@
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Ensure this matches your User model file name
+const User = require('../models/user'); // Ensure this matches your User model file name
 
 const JWT_SECRET = 'your_jwt_secret_key'; // Replace with your actual secret key
 

@@ -35,6 +35,7 @@ const PatientDetails = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [expandedPatientIndex, setExpandedPatientIndex] = useState(null);
 
+  // Fetch patients data
   const fetchPatients = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/patients");
@@ -45,9 +46,19 @@ const PatientDetails = () => {
     }
   };
 
+  // Retrieve the case counter from localStorage when the component mounts
   useEffect(() => {
+    const savedCaseCounter = localStorage.getItem("caseCounter");
+    if (savedCaseCounter) {
+      setCaseCounter(parseInt(savedCaseCounter, 10));
+    }
     fetchPatients();
   }, []);
+
+  // Save case counter to localStorage every time it updates
+  useEffect(() => {
+    localStorage.setItem("caseCounter", caseCounter.toString());
+  }, [caseCounter]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
