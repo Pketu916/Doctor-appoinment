@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../img/logo.png';
 
 const Navbar = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRedPhase, setIsRedPhase] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const items = document.querySelectorAll('.nav-item .nav-link');
@@ -29,10 +30,19 @@ const Navbar = () => {
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, [currentIndex, isRedPhase]);
 
+  // Logout handler function
+  const handleLogout = () => {
+    // Clear user session data (you might be using localStorage, sessionStorage, cookies, etc.)
+    localStorage.removeItem('userToken');  // Example if token is stored in localStorage
+
+    // Redirect to login page
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
-        <img src={Logo} alt="Logo" to="/" className="navbar-logo" />
+        <img src={Logo} alt="Logo" className="navbar-logo" />
         <NavLink
           className="navbar-brand"
           style={{
@@ -74,6 +84,17 @@ const Navbar = () => {
               <NavLink className="nav-link" to="/doctor-list" activeClassName="active">
                 Doctors
               </NavLink>
+            </li>
+            {/* Logout button */}
+            {/* <li className="nav-item">
+              <NavLink className="nav-link" to="/profile" activeClassName="active">
+                Profile
+              </NavLink>
+            </li> */}
+            <li className="nav-item">
+              <button id='logout' className="nav-link btn-link" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>

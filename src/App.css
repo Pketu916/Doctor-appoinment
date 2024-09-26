@@ -239,8 +239,22 @@ h2:hover,
 h3:hover {
     color: red;
 }
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
     color: red;
+}
+
+#logout {
+    margin-left: 30px;
+    background-color: #2529303e;
+    padding: 2px;
+    margin-top: 12px;
+}
+
+#logout:hover{
+    /* text-decoration: none; */
+    background-color: rgba(255, 0, 0, 0.286);
 }
 
 .btnnext {

@@ -352,7 +352,7 @@ const PatientDetails = () => {
                   <button type="button" className="btnprev btn btn-secondary" onClick={() => goToPreviousSection(5)}>Previous</button>
                 </div>
               </Collapse>
-                  <button type="submit" className="btn btn-primary">{isEditing ? "Update" : "Submit"}</button>
+              <button type="submit" className="btn btn-primary">{isEditing ? "Update" : "Submit"}</button>
             </form>
           </div>
         </Collapse>
@@ -363,13 +363,13 @@ const PatientDetails = () => {
         <h3>Patient List</h3>
         <div className="sort" >
           <label htmlFor="sortOrder">Sort By:</label>
-          <select  className="form-control" id="sortOrder" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <select className="form-control" id="sortOrder" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="caseNumber">Case Number</option>
             <option value="name">Name</option>
           </select>
 
           <label htmlFor="sortOrderDirection">Sort Order:</label>
-          <select  className="form-control" id="sortOrderDirection" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+          <select className="form-control" id="sortOrderDirection" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
             <option value="ascending">Ascending</option>
             <option value="descending">Descending</option>
           </select>
@@ -382,9 +382,27 @@ const PatientDetails = () => {
               </div>
               <Collapse in={expandedPatientIndex === index}>
                 <div>
+                  <div>{`Case Number: ${patient.caseNumber}`}</div>
+                  <div>{`Name: ${patient.name}`}</div>
                   <div>{`Age: ${patient.age}`}</div>
                   <div>{`Gender: ${patient.gender}`}</div>
+                  <div>{`Date of Birth: ${new Date(patient.dob).toLocaleDateString()}`}</div> {/* Format the date */}
+                  <div>{`Address: ${patient.address}`}</div>
                   <div>{`Phone: ${patient.phone}`}</div>
+                  <div>{`Email: ${patient.email}`}</div>
+                  <div>{`Emergency Contact: ${patient.emergencyContact}`}</div>
+                  <div>{`Past Diagnoses: ${patient.pastDiagnoses || 'N/A'}`}</div> {/* Show N/A if empty */}
+                  <div>{`Surgeries: ${patient.surgeries || 'N/A'}`}</div>
+                  <div>{`Allergies: ${patient.allergies || 'N/A'}`}</div>
+                  <div>{`Current Medications: ${patient.currentMedications || 'N/A'}`}</div>
+                  <div>{`Appointment Date: ${patient.appointmentDate ? new Date(patient.appointmentDate).toLocaleDateString() : 'N/A'}`}</div>
+                  <div>{`Doctor Name: ${patient.doctorName || 'N/A'}`}</div>
+                  <div>{`Insurance Provider: ${patient.insuranceProvider || 'N/A'}`}</div>
+                  <div>{`Policy Number: ${patient.policyNumber || 'N/A'}`}</div>
+                  <div>{`Coverage Details: ${patient.coverageDetails || 'N/A'}`}</div>
+                  <div>{`Doctor's Notes: ${patient.doctorsNotes || 'N/A'}`}</div>
+                  <div>{`Patient Notes: ${patient.patientNotes || 'N/A'}`}</div>
+                  <div>{`Additional Observations: ${patient.additionalObservations || 'N/A'}`}</div>
                   <button type="button" className="btn btn-secondary" onClick={() => handleEditPatient(index)}>Edit</button>
                 </div>
               </Collapse>

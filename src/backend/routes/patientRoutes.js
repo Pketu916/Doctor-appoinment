@@ -1,5 +1,5 @@
 const express = require('express');
-const Patient = require('../models/routes'); // Your Patient model
+const Patient = require('../models/patientRoutes'); // Your Patient model
 const router = express.Router();
 
 // Create a new patient
