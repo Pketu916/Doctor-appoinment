@@ -13,12 +13,13 @@ const Admin = ({ onLogin }) => {
 
     try {
       const response = await axios.post('http://localhost:3000/api/admin/login', { username, password });
-      const { token } = response.data;
+      const { token, user } = response.data;
 
-      // Store the token or handle login state
       localStorage.setItem('token', token);
-      onLogin(); // Notify App component of successful login
-      navigate('/home'); // Redirect to home page
+      localStorage.setItem('userData', JSON.stringify(user));
+
+      onLogin();
+      navigate('/home'); // Adjust this to your desired home route
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'An error occurred');
     }
@@ -32,11 +33,23 @@ const Admin = ({ onLogin }) => {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Username:</label>
-              <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} required />
+              <input 
+                type="text" 
+                className="form-control" 
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+                required 
+              />
             </div>
             <div className="form-group">
               <label>Password:</label>
-              <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <input 
+                type="password" 
+                className="form-control" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
+              />
             </div>
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <button type="submit" className="btn btn-primary">Login</button>

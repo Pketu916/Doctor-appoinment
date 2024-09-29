@@ -1,42 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../img/logo.png';
+import ProfileDropdown from './ProfileDropdown'; // Assuming this is a separate component
 
 const Navbar = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isRedPhase, setIsRedPhase] = useState(true);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const items = document.querySelectorAll('.nav-item .nav-link');
-    const totalItems = items.length;
+    // Fetch user data from local storage
+    const storedUser = localStorage.getItem('userData');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
-    const intervalId = setInterval(() => {
-      // Reset all items to default color
-      items.forEach(item => item.classList.remove('red', 'blue'));
-
-      // Set the current item color
-      items[currentIndex].classList.add(isRedPhase ? 'red' : 'blue');
-
-      // Move to the next item
-      setCurrentIndex((currentIndex + 1) % totalItems);
-
-      // If we completed a full cycle, switch phase (red to blue or vice versa)
-      if (currentIndex === totalItems - 1) {
-        setIsRedPhase(!isRedPhase);
-      }
-    }, 500); // Change color every 0.5s
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [currentIndex, isRedPhase]);
-
-  // Logout handler function
   const handleLogout = () => {
-    // Clear user session data (you might be using localStorage, sessionStorage, cookies, etc.)
-    localStorage.removeItem('userToken');  // Example if token is stored in localStorage
-
-    // Redirect to login page
-    navigate('/login');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData'); // Clear user data
+    setUser(null); // Clear state
+    navigate('/login'); // Redirect to login
   };
 
   return (
@@ -85,18 +68,13 @@ const Navbar = () => {
                 Doctors
               </NavLink>
             </li>
-            {/* Logout button */}
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/profile" activeClassName="active">
-                Profile
-              </NavLink>
-            </li> */}
-            <li className="nav-item">
-              <button id='logout' className="nav-link btn-link" onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
           </ul>
+          {user ? (
+            // If user is logged in, show profile and logout option
+            <ProfileDropdown user={user} onLogout={handleLogout} />
+          ) : (
+            <button onClick={() => navigate('/login')} className="btn btn-primary">Login</button>
+          )}
         </div>
       </div>
     </nav>
