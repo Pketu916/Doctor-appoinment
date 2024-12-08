@@ -22,9 +22,9 @@ const Footer = () => {
           {/* Contact Info Section */}
           <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
             <h5 className="text-uppercase">Contact Info</h5>
-            <p>+53 345 7953 32453</p>
-            <p>yourmail@gmail.com</p>
-            <p>contact@gmail.com</p>
+            <p>+91 9265650606</p>
+            <p>21beit54044@vsitr.ac.in</p>
+            <p>pketu916@gmail.com</p>
           </div>
 
           {/* Our Locations Section */}

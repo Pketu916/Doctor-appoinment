@@ -33,7 +33,7 @@ const ProfileDropdown = ({ user, onLogout }) => {
           <p><strong>Phone Number:</strong> {user.phone}</p>
           <p><strong>Email ID:</strong> {user.email}</p>
           <p><strong>Username:</strong> {user.username}</p>
-          <button onClick={onLogout}>Logout</button>
+          {/* <button onClick={onLogout}>Logout</button> */}
         </div>
       )}
     </div>

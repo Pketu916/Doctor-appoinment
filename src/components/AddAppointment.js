@@ -108,9 +108,9 @@ const AddAppointment = () => {
               Navigate the enchanted forest of appointments with ease. Choose your date, time, and doctor, and set your path to better health with just a few clicks.
             </p>
             <div className="btnset">
-              <button type="button" id="homeButton" className="btn btn-primary mx-2">
+              {/* <button type="button" id="homeButton" className="btn btn-primary mx-2">
                 Home
-              </button>
+              </button> */}
               <button
                 type="button"
                 id="addAppointmentButton"

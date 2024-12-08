@@ -197,9 +197,9 @@ const PatientDetails = () => {
               In the quiet grove, add your details to the Book of Health. Each entry is a step in your journey, carefully recorded to ensure personalized care.
             </p>
             <div className="btnset">
-              <button type="button" id="homeButton" className="btn btn-primary mx-2">
+              {/* <button type="button" id="homeButton" className="btn btn-primary mx-2">
                 Home
-              </button>
+              </button> */}
               <button
                 type="button"
                 id="addAppointmentButton"
